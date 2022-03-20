@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文本输入</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style type="text/css">
+        .t_area{
+            overflow-y:visible
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" >
+                <h3 style="align-text: center">
+                    实体提取
+                </h3>
+            </div>
+            <div class="col-md-12">
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label for="content">请输入一段现病史：</label>
+                      <textarea rows="5" name="content" type="text" class="form-control t_area" id="content" placeholder="患者5年前体检B超发现肝硬化，一直未予以进一步治疗，3年前患者因肾功能衰竭开始行血透治疗，近1年患者多次出现黑便，考虑上消化道出现，予以保守治疗后好转。10天前患者开始出现血透后发热，体温37.8摄氏度，隔天后好转，此后发热反复血透后出现，无畏寒，无咳嗽咳痰，无头痛头晕，无恶心呕吐，无胸闷气喘等不适，为求进一步治疗入院，门诊拟“肝硬化，肾功能衰竭”收住入院。"></textarea>
+                  </div>
+                  <button class="btn btn-primary" id="submit">提取</button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <div class="form-group">
+                    <label for="text_result">实体标记如下：</label>
+                        <span style="color:#ff0000;">疾病</span>
+                        <span style="color:#0000ff;">症状</span>
+                        <span style="color:#00b8ff;">检查结果</span>
+                        <span style="color:#B8860B;">检查项目</span>
+                        <span style="color:#00ff00;">治疗</span>
+                        <div id="text_result"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="panel-body">
+                    <div class="form-group">
+                    <label for="entity_result">实体抽取如下：</label>
+                        <div id="entity_result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="application/javascript">
+        $('#submit').click(function () {
+            data = {'content':$('#content').val()}
+            $.ajax({
+                type:"POST",
+                url:"index",
+                contentType:"application/json;charset=utf-8",
+                data:JSON.stringify(data),
+                dataType:"json",
+                success:function (message) {
+                    console.log(message);
+                    $('#text_result').empty();
+                    $('#text_result').append(message['data']);
+                    $('#entity_result').empty();
+                    $('#entity_result').append(message['entity']);
+                },
+                error:function (messgae) {
+                    console.log(messgae);
+                }
+            });
+        })
+    </script>
+</body>
+</html>
