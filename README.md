@@ -24,5 +24,3 @@
 ![Image text](https://raw.githubusercontent.com/zhangli140/MedQA/main/info/23.png)
 ![Image text](https://raw.githubusercontent.com/zhangli140/MedQA/main/info/24.png)
 ![Image text](https://raw.githubusercontent.com/zhangli140/MedQA/main/info/25.png)
-![Image text](https://raw.githubusercontent.com/zhangli140/MedQA/main/info/26.png)
-![Image text](https://raw.githubusercontent.com/zhangli140/MedQA/main/info/27.png)
